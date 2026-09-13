@@ -1,0 +1,46 @@
+<mat-card>
+  <mat-card-header class="cabecalho">
+    <mat-card-title>Lista de compras</mat-card-title>
+    <span class="spacer"></span>
+    <button mat-stroked-button (click)="carregar()">
+      <mat-icon>refresh</mat-icon>
+      Atualizar
+    </button>
+  </mat-card-header>
+
+  <mat-card-subtitle class="subtitulo">
+    Produtos com estoque em 30% ou menos da quantidade minima de referencia cadastrada.
+  </mat-card-subtitle>
+
+  <mat-card-content>
+    @if (carregando()) {
+      <div class="carregando">
+        <mat-spinner diameter="36" />
+      </div>
+    } @else if (produtos().length === 0) {
+      <p class="vazio">
+        <mat-icon>check_circle</mat-icon>
+        Nenhum produto precisa de reposicao no momento.
+      </p>
+    } @else {
+      <mat-list>
+        @for (produto of produtos(); track produto.id) {
+          <mat-list-item class="item">
+            <mat-icon matListItemIcon class="icone-alerta">warning</mat-icon>
+            <div matListItemTitle>{{ produto.nome }}</div>
+            <div matListItemLine>
+              Estoque atual: {{ produto.quantidade }} · Minimo de referencia: {{ produto.quantidadeMinima }}
+              · Fornecedor: {{ produto.fornecedor }}
+            </div>
+            <div matListItemMeta class="sugestao">
+              Comprar ao menos {{ sugestaoDeCompra(produto) }} un.
+              <span class="custo-estimado">
+                (~{{ sugestaoDeCompra(produto) * produto.precoCompra | currency: 'BRL' }})
+              </span>
+            </div>
+          </mat-list-item>
+        }
+      </mat-list>
+    }
+  </mat-card-content>
+</mat-card>

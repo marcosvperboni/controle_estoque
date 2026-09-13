@@ -1,0 +1,18 @@
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Variaveis de ambiente locais
+.env
+.env.local
+
+# Cache de ferramentas locais
+.impeccable/

@@ -1,0 +1,91 @@
+<mat-card>
+  <mat-card-header class="cabecalho">
+    <mat-card-title>Produtos</mat-card-title>
+    <span class="spacer"></span>
+    <button mat-flat-button color="primary" (click)="abrirFormulario(null)">
+      <mat-icon>add</mat-icon>
+      Novo produto
+    </button>
+  </mat-card-header>
+
+  <mat-card-content>
+    @if (carregando()) {
+      <div class="carregando">
+        <mat-spinner diameter="36" />
+      </div>
+    } @else if (produtos().length === 0) {
+      <p class="vazio">Nenhum produto cadastrado ainda. Clique em "Novo produto" para comecar.</p>
+    } @else {
+      <div class="tabela-wrapper">
+        <table mat-table [dataSource]="produtos()">
+          <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef>Produto</th>
+            <td mat-cell *matCellDef="let produto">
+              <div class="nome-produto">
+                <span>{{ produto.nome }}</span>
+                @if (produto.abaixoDoLimiarDeCompra) {
+                  <mat-chip class="chip-alerta" matTooltip="Estoque abaixo de 30% do minimo cadastrado">
+                    <mat-icon>warning</mat-icon>
+                    Repor estoque
+                  </mat-chip>
+                }
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="codigoBarras">
+            <th mat-header-cell *matHeaderCellDef>Codigo de barras</th>
+            <td mat-cell *matCellDef="let produto">{{ produto.codigoBarras }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="fornecedor">
+            <th mat-header-cell *matHeaderCellDef>Fornecedor</th>
+            <td mat-cell *matCellDef="let produto">{{ produto.fornecedor }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="marca">
+            <th mat-header-cell *matHeaderCellDef>Marca</th>
+            <td mat-cell *matCellDef="let produto">{{ produto.marca }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="quantidade">
+            <th mat-header-cell *matHeaderCellDef>Estoque</th>
+            <td mat-cell *matCellDef="let produto">
+              {{ produto.quantidade }} <span class="minimo">/ min {{ produto.quantidadeMinima }}</span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="precoVenda">
+            <th mat-header-cell *matHeaderCellDef>Preco de venda</th>
+            <td mat-cell *matCellDef="let produto">{{ produto.precoVenda | currency: 'BRL' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="margem">
+            <th mat-header-cell *matHeaderCellDef>Margem</th>
+            <td mat-cell *matCellDef="let produto">{{ produto.margem | percent: '1.1-1' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="markup">
+            <th mat-header-cell *matHeaderCellDef>Markup</th>
+            <td mat-cell *matCellDef="let produto">{{ produto.markup | number: '1.2-2' }}x</td>
+          </ng-container>
+
+          <ng-container matColumnDef="acoes">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let produto" class="acoes">
+              <button mat-icon-button matTooltip="Editar" (click)="abrirFormulario(produto)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button matTooltip="Excluir" (click)="excluir(produto)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+          <tr mat-row *matRowDef="let row; columns: colunas" [class.linha-alerta]="row.abaixoDoLimiarDeCompra"></tr>
+        </table>
+      </div>
+    }
+  </mat-card-content>
+</mat-card>

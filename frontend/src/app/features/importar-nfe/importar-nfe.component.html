@@ -1,0 +1,70 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Importar nota fiscal eletronica (NF-e)</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-subtitle class="subtitulo">
+    Envie o XML da NF-e: produtos com codigo de barras ja cadastrado tem o estoque reabastecido
+    automaticamente e produtos novos sao cadastrados a partir dos dados da nota.
+  </mat-card-subtitle>
+
+  <mat-card-content>
+    <div class="area-envio">
+      <input
+        type="file"
+        accept=".xml,text/xml"
+        id="arquivo-nfe"
+        class="input-arquivo"
+        (change)="selecionarArquivo($event)"
+      />
+      <label for="arquivo-nfe" class="rotulo-arquivo">
+        <mat-icon>upload_file</mat-icon>
+        {{ arquivoSelecionado?.name ?? 'Selecionar arquivo XML da NF-e' }}
+      </label>
+
+      <button
+        mat-flat-button
+        color="primary"
+        [disabled]="!arquivoSelecionado || enviando()"
+        (click)="importar()"
+      >
+        @if (enviando()) {
+          <mat-spinner diameter="18" />
+        } @else {
+          <mat-icon>cloud_upload</mat-icon>
+        }
+        Importar
+      </button>
+    </div>
+
+    @if (resultado(); as resposta) {
+      <div class="resultado">
+        <h3>Fornecedor: {{ resposta.fornecedor }}</h3>
+
+        @if (resposta.produtosCriados.length > 0) {
+          <p class="secao-titulo">Produtos cadastrados automaticamente</p>
+          <div class="chips">
+            @for (produto of resposta.produtosCriados; track produto.id) {
+              <mat-chip class="chip-novo">
+                <mat-icon>fiber_new</mat-icon>
+                {{ produto.nome }} (+{{ produto.quantidade }})
+              </mat-chip>
+            }
+          </div>
+        }
+
+        @if (resposta.produtosReabastecidos.length > 0) {
+          <p class="secao-titulo">Produtos reabastecidos</p>
+          <div class="chips">
+            @for (produto of resposta.produtosReabastecidos; track produto.id) {
+              <mat-chip class="chip-reabastecido">
+                <mat-icon>inventory</mat-icon>
+                {{ produto.nome }} (estoque atual: {{ produto.quantidade }})
+              </mat-chip>
+            }
+          </div>
+        }
+      </div>
+    }
+  </mat-card-content>
+</mat-card>
