@@ -1,0 +1,62 @@
+.cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.carregando {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 0;
+}
+
+.vazio {
+  padding: 2rem 0;
+  text-align: center;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.tabela-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.nome-produto {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.minimo {
+  color: var(--mat-sys-on-surface-variant);
+  font-size: 0.8rem;
+}
+
+.chip-alerta {
+  --mdc-chip-elevated-container-color: color-mix(in srgb, var(--estoque-cor-alerta) 18%, transparent);
+  color: var(--estoque-cor-alerta);
+  font-size: 0.72rem;
+
+  mat-icon {
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
+  }
+}
+
+.linha-alerta {
+  background-color: color-mix(in srgb, var(--estoque-cor-alerta) 6%, transparent);
+}
+
+.acoes {
+  white-space: nowrap;
+}

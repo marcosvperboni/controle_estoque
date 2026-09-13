@@ -1,0 +1,82 @@
+<h2 mat-dialog-title>{{ modoEdicao ? 'Editar produto' : 'Novo produto' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="salvar()">
+  <mat-dialog-content class="grid">
+    <mat-form-field appearance="outline" class="campo-largo">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="nome" maxlength="150" />
+      @if (form.controls.nome.invalid && form.controls.nome.touched) {
+        <mat-error>Informe o nome do produto</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Codigo de barras</mat-label>
+      <input matInput formControlName="codigoBarras" maxlength="50" />
+      @if (form.controls.codigoBarras.invalid && form.controls.codigoBarras.touched) {
+        <mat-error>Informe o codigo de barras</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Data de validade</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dataValidade" />
+      <mat-datepicker-toggle matIconSuffix [for]="picker" />
+      <mat-datepicker #picker />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Fornecedor</mat-label>
+      <input matInput formControlName="fornecedor" maxlength="150" />
+      @if (form.controls.fornecedor.invalid && form.controls.fornecedor.touched) {
+        <mat-error>Informe o fornecedor</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Marca</mat-label>
+      <input matInput formControlName="marca" maxlength="100" />
+      @if (form.controls.marca.invalid && form.controls.marca.touched) {
+        <mat-error>Informe a marca</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Preco de compra (R$)</mat-label>
+      <input matInput type="number" step="0.01" min="0.01" formControlName="precoCompra" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Preco de venda (R$)</mat-label>
+      <input matInput type="number" step="0.01" min="0.01" formControlName="precoVenda" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Preco de varejo (R$)</mat-label>
+      <input matInput type="number" step="0.01" min="0.01" formControlName="precoVarejo" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Preco de atacado (R$)</mat-label>
+      <input matInput type="number" step="0.01" min="0.01" formControlName="precoAtacado" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Quantidade em estoque</mat-label>
+      <input matInput type="number" min="0" formControlName="quantidade" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Estoque minimo (referencia)</mat-label>
+      <input matInput type="number" min="0" formControlName="quantidadeMinima" />
+      <mat-hint>Compra e sugerida quando o estoque atual cai a 30% deste valor</mat-hint>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+    <button mat-flat-button color="primary" type="submit" [disabled]="salvando">
+      {{ salvando ? 'Salvando...' : 'Salvar' }}
+    </button>
+  </mat-dialog-actions>
+</form>

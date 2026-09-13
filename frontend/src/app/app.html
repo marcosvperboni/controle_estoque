@@ -1,0 +1,34 @@
+<mat-toolbar color="primary" class="toolbar">
+  <mat-icon aria-hidden="true">inventory_2</mat-icon>
+  <span class="titulo">Controle de Estoque</span>
+
+  <nav class="nav">
+    <a mat-button routerLink="/produtos" routerLinkActive="ativo">
+      <mat-icon>inventory</mat-icon>
+      Produtos
+    </a>
+    <a mat-button routerLink="/importar-nfe" routerLinkActive="ativo">
+      <mat-icon>receipt_long</mat-icon>
+      Importar NF-e
+    </a>
+    <a mat-button routerLink="/lista-compras" routerLinkActive="ativo">
+      <mat-icon>shopping_cart</mat-icon>
+      Lista de Compras
+    </a>
+  </nav>
+
+  <span class="spacer"></span>
+
+  <button
+    mat-icon-button
+    type="button"
+    (click)="themeService.alternar()"
+    [matTooltip]="themeService.escuro() ? 'Mudar para tema claro' : 'Mudar para tema escuro'"
+  >
+    <mat-icon>{{ themeService.escuro() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+  </button>
+</mat-toolbar>
+
+<main class="conteudo">
+  <router-outlet />
+</main>

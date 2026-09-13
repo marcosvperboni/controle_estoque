@@ -1,0 +1,48 @@
+.cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.subtitulo {
+  padding: 0 1rem 0.5rem;
+}
+
+.carregando {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 0;
+}
+
+.vazio {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 2.5rem 0;
+  color: var(--estoque-cor-ok);
+}
+
+.icone-alerta {
+  color: var(--estoque-cor-critico);
+}
+
+.item {
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
+}
+
+.sugestao {
+  font-weight: 600;
+  text-align: right;
+}
+
+.custo-estimado {
+  font-weight: 400;
+  color: var(--mat-sys-on-surface-variant);
+  display: block;
+  font-size: 0.75rem;
+}

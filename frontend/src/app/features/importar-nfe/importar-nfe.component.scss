@@ -1,0 +1,59 @@
+.subtitulo {
+  padding: 0 1rem 1rem;
+}
+
+.area-envio {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+}
+
+.input-arquivo {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.rotulo-arquivo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border: 1px dashed var(--mat-sys-outline);
+  border-radius: 8px;
+  cursor: pointer;
+  flex: 1 1 260px;
+}
+
+.rotulo-arquivo:hover {
+  background-color: color-mix(in srgb, var(--mat-sys-primary) 6%, transparent);
+}
+
+.resultado {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--mat-sys-outline-variant);
+}
+
+.secao-titulo {
+  font-weight: 600;
+  margin: 1rem 0 0.5rem;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip-novo {
+  color: var(--estoque-cor-ok);
+}
+
+.chip-reabastecido {
+  color: var(--mat-sys-primary);
+}
